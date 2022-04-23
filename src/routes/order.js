@@ -25,9 +25,7 @@ import axios from "axios";
 
 export default function Order() {
     let params = useParams()
-    const [showPassword, setShowPassword] = useState(false);
     const [typeJoki, setTypeJoki] = useState("")
-
     const [name, setName] = useState("")
     const [phone, setPhone] = useState("")
     const [win, setWin] = useState(0)
@@ -41,6 +39,13 @@ export default function Order() {
         let calculatedPrice = win * 1000
         return setPrice(calculatedPrice)
     }, [win])
+
+    useEffect(() => {
+        console.log(currRank, targetRank, " rank;;")
+        let difRank = Number(targetRank) - Number(currRank) 
+        let calculatedPrice = difRank * 50000
+        return setPrice(calculatedPrice)
+    }, [currRank, targetRank])
 
     const orderNow = async () => {
         setIsLoading(true)
@@ -125,18 +130,19 @@ export default function Order() {
                   <> 
                     <FormControl id="currentrank" isRequired>
                         <FormLabel>Current Rank</FormLabel>
-                        <Select placeholder='Select option'>
-                            <option value='option1'>Option 1</option>
-                            <option value='option2'>Option 2</option>
-                            <option value='option3'>Option 3</option>
+                        <Select onChange={(e) => setCurrRank(e.target.value)}>
+                            <option value='1'>Warrior</option>
+                            <option value='2'>Elite</option>
+                            <option value='3'>Master</option>
                         </Select>
                     </FormControl>
                     <FormControl id="targetrank" isRequired>
                         <FormLabel>Target Rank</FormLabel>
-                        <Select placeholder='Select option'>
-                            <option value='option1'>Option 1</option>
-                            <option value='option2'>Option 2</option>
-                            <option value='option3'>Option 3</option>
+                        <Select  onChange={(e) => setTargetRank(e.target.value)}>
+                            <option value='4'>Epic</option>
+                            <option value='5'>Legend</option>
+                            <option value='6'>Mythic</option>
+                            <option value='7'>Mythic Glory</option>
                         </Select>
                     </FormControl>
                   </> : 

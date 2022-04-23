@@ -52,7 +52,7 @@ export default function MyOrder() {
                 <Td isNumeric>{d.price}</Td>
             </Tr>
               })
-              : ""
+              : "no data order yet"
           }
           </Tbody>
         </Table>
