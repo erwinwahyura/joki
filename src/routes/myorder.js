@@ -37,6 +37,7 @@ export default function MyOrder() {
         <Table variant='striped' colorScheme='gray'>
           <Thead>
             <Tr>
+              <Th>No</Th>
               <Th>Name</Th>
               <Th>Phone</Th>
               <Th isNumeric>Price</Th>
@@ -45,8 +46,9 @@ export default function MyOrder() {
           <Tbody>
           {
               data.length > 0 ? 
-              data.map(d => {
+              data.map((d,i) => {
                 return <Tr key={d._id}>
+                <Td>{++i}</Td>
                 <Td>{d.name}</Td>
                 <Td>{d.phone}</Td>
                 <Td isNumeric>{d.price}</Td>
