@@ -7,37 +7,57 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 import * as serviceWorker from './serviceWorker';
 
+// user panel
 import About from "./routes/about";
 import Order from "./routes/order";
 import MyOrder from "./routes/myorder";
+
+// admin panel
+import Admin from "./routes/admin";
+import AdminOrderList from "./routes/adminOrderList";
 
 import { ColorModeSwitcher } from './ColorModeSwitcher';
 
 
 const container = document.getElementById('root')
 const root = createRoot(container)
+console.log("sds", window.location.pathname)
 root.render(
   <ChakraProvider theme={theme}>
     <BrowserRouter>
       <Box textAlign="center" fontSize="xl">
         <Grid minH="100vh" p={10}>
-          <Breadcrumb separator=''>
-            <BreadcrumbItem>
-              <BreadcrumbLink href='/'>Home</BreadcrumbLink>
-            </BreadcrumbItem>
+          {
+            window.location.pathname !== "/admin-panel" && 
+            window.location.pathname !== "/admin-order-list"  ? 
+              <Breadcrumb separator=''>
+                <BreadcrumbItem>
+                  <BreadcrumbLink href='/'>Home</BreadcrumbLink>
+                </BreadcrumbItem>
 
-            <BreadcrumbItem>
-              <BreadcrumbLink href='/order'>Order</BreadcrumbLink>
-            </BreadcrumbItem>
+                <BreadcrumbItem>
+                  <BreadcrumbLink href='/order'>Order</BreadcrumbLink>
+                </BreadcrumbItem>
 
-            <BreadcrumbItem>
-              <BreadcrumbLink href='/my-order'>My Order</BreadcrumbLink>
-            </BreadcrumbItem>
+                <BreadcrumbItem>
+                  <BreadcrumbLink href='/my-order'>My Order</BreadcrumbLink>
+                </BreadcrumbItem>
 
-            <BreadcrumbItem>
-              <BreadcrumbLink href='/about'>About</BreadcrumbLink>
-            </BreadcrumbItem>
-          </Breadcrumb>
+                <BreadcrumbItem>
+                  <BreadcrumbLink href='/about'>About</BreadcrumbLink>
+                </BreadcrumbItem>
+              </Breadcrumb> : 
+
+              <Breadcrumb separator=''>
+                <BreadcrumbItem>
+                  <BreadcrumbLink href='/admin-panel'>Home</BreadcrumbLink>
+                </BreadcrumbItem>
+                <BreadcrumbItem>
+                  <BreadcrumbLink href='/admin-order-list'>Order</BreadcrumbLink>
+                </BreadcrumbItem>
+
+              </Breadcrumb>
+          }
           <Grid m={1}>
             <Routes>
               <Route path="/" element={<App />}/>
@@ -46,6 +66,8 @@ root.render(
               <Route path="/order/" element={<Order />}>
                 <Route path=":type" element={<Order />}/> 
               </Route> 
+              <Route path="/admin-panel" element={<Admin />}/>
+              <Route path="/admin-order-list" element={<AdminOrderList />}/>
             </Routes>
           </Grid>
         </Grid>
